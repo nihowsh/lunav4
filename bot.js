@@ -1,9 +1,18 @@
+const express = require("express");
+const app = express();
+
+app.get("/", (req, res) => {
+  res.send("Bot is running!");
+});
+
+app.listen(process.env.PORT || 3000, () => {
+  console.log("Web server running");
+});
 const { Client, GatewayIntentBits, Collection, Partials, EmbedBuilder } = require('discord.js');
 const { Client: SelfbotClient } = require('discord.js-selfbot-v13');
 const Sequelize = require('sequelize');
 const fs = require('fs');
 const path = require('path');
-const express = require('express');
 const { AttachmentRules: SharedAttachmentRules, AutoModConfig, WordFilter, ScheduledMentions, LogSettings, Warnings } = require('./database');
 require('dotenv').config();
 
@@ -183,12 +192,6 @@ function getRandomDelay(min, max) {
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
-
-// ============== KEEP-ALIVE SERVER ==============
-const app = express();
-app.get('/', (req, res) => res.send('OK'));
-const KEEPALIVE_PORT = process.env.PORT || 3000;
-app.listen(KEEPALIVE_PORT, () => console.log(`Keep-alive server running on port ${KEEPALIVE_PORT}`));
 
 // ============== ERROR HANDLERS ==============
 process.on('uncaughtException', err => {

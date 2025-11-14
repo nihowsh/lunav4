@@ -147,9 +147,12 @@ async function compressVideo(inputPath, outputPath, targetSize) {
   const args = [
     '-i', inputPath,
     '-c:v', 'libx264',
-    '-b:v', `${targetBitrate}k`,
+    '-preset', 'veryfast',
+    '-crf', '28',
+    '-maxrate', `${targetBitrate}k`,
+    '-bufsize', `${targetBitrate * 2}k`,
     '-c:a', 'aac',
-    '-b:a', '128k',
+    '-b:a', '96k',
     '-movflags', '+faststart',
     '-y',
     outputPath
